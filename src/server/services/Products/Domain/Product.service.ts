@@ -21,10 +21,8 @@ export class ProductService {
     return product;
   }
 
-  async editProduct(product: Product, body: Product): Promise<Product> {
+  async editProduct(_body: Product): Promise<void> {
     this.logger.log("editProduct");
-
-    return { ...product, ...body };
   }
 
   async removeProduct(id: string): Promise<void> {

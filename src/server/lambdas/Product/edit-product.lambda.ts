@@ -2,17 +2,18 @@ import {
   APIGatewayProxyEventV2,
   APIGatewayProxyResultV2
 } from "aws-lambda/trigger/api-gateway-proxy";
-import { productRemover } from "./../../services/Products/CompositionRoot";
+import { productEditor } from "./../../services/Products/CompositionRoot";
 import { sendError } from "../../utilities/lamda.utility";
 
 export async function editProduct(
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> {
   try {
-    const { pathParameters } = event;
-    if (!pathParameters?.id) return sendError("invalid request");
-    const id = pathParameters.id;
-    const result = await productRemover.removeProduct(id);
+    const { body } = event;
+    if (!body) {
+      return sendError("invalid request");
+    }
+    const result = await productEditor.editProduct(JSON.parse(body));
 
     return {
       statusCode: 200,
