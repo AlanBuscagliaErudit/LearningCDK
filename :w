@@ -1,0 +1,3 @@
+const getter = new ProductGetter();
+export cons productService = new ProductService(getter);
+
