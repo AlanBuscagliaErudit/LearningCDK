@@ -98,7 +98,7 @@ export class MyStack extends Stack {
         resource: ["removeProduct", "{id}"]
       }
     ];
-    
+
     const api = new RestApi(this, "ApiGateway", {});
     const integratedLambdasMap = LambdaIntegrator(Lambdas, api);
     Lambdas.forEach((lambda) => {

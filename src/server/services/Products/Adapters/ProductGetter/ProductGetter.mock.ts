@@ -7,12 +7,15 @@ import { productServiceMock } from "../../Domain/Product.service.mock";
 export let productMock: Product = {
   id: "1",
   name: "product",
-  price: "100",
+  price: "100"
 };
 
 export const dynamoClientMock = {
   scan: jest.fn().mockResolvedValue({ Items: [marshall(productMock)] }),
-  getItem: jest.fn().mockResolvedValue({ Item: marshall(productMock) }),
+  getItem: jest.fn().mockResolvedValue({ Item: marshall(productMock) })
 } as unknown as DynamoDB;
 
-export const productGetterMock = new ProductGetter(productServiceMock, dynamoClientMock);
+export const productGetterMock = new ProductGetter(
+  productServiceMock,
+  dynamoClientMock
+);

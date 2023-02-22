@@ -1,15 +1,21 @@
 import { DynamoDB, ScanInput } from "@aws-sdk/client-dynamodb";
-import { GenerateDynamoSearchItem, TransformDynamoItem } from "../../../../utilities/dynamo.utility";
+import {
+  GenerateDynamoSearchItem,
+  TransformDynamoItem
+} from "../../../../utilities/dynamo.utility";
 import { Product, ProductService } from "../../Domain/Product.service";
 import { ForGettingProduct } from "../../Ports/ForGettingProduct.port";
 
 export class ProductGetter implements ForGettingProduct {
   private productTable = process.env.TODO_TABLE_NAME as string;
 
-  constructor(private productService: ProductService, private dynamoClient: DynamoDB) {}
+  constructor(
+    private productService: ProductService,
+    private dynamoClient: DynamoDB
+  ) {}
   async getProducts(): Promise<Product[]> {
     const scanProducts: ScanInput = {
-      TableName: this.productTable,
+      TableName: this.productTable
     };
     const { Items: dynamoItems } = await this.dynamoClient.scan(scanProducts);
     const result = TransformDynamoItem(dynamoItems);

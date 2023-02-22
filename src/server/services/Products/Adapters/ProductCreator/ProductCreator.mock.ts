@@ -1,6 +1,6 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
-import { ProductEditor } from "./ProductEditor.adapter";
+import { ProductCreator } from "./ProductCreator.adapter";
 import { Product } from "../../Domain/Product.service";
 import { productServiceMock } from "../../Domain/Product.service.mock";
 
@@ -11,10 +11,10 @@ export let productMock: Product = {
 };
 
 export const dynamoClientMock = {
-  updateItem: jest.fn().mockResolvedValue({ Item: marshall(productMock) })
+  putItem: jest.fn().mockResolvedValue({ Item: marshall(productMock) })
 } as unknown as DynamoDB;
 
-export const productEditorMock = new ProductEditor(
+export const productCreatorMock = new ProductCreator(
   productServiceMock,
   dynamoClientMock
 );

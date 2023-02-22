@@ -20,6 +20,6 @@ export async function editProduct(
       body: JSON.stringify(result)
     };
   } catch (err) {
-    return sendError("error in getProduct");
+    return sendError("error in editProduct");
   }
 }

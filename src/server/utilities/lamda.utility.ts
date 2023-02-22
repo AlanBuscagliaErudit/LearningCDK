@@ -10,7 +10,7 @@ export enum Methods {
   GET = "GET",
   POST = "POST",
   PUT = "PUT",
-  DELETE = "DELETE",
+  DELETE = "DELETE"
 }
 
 export interface LambdaForIntegrator {
@@ -38,43 +38,47 @@ export const LambdaIntegrator = (
       entry: path.resolve(lambda.entry),
       ...(lambda.handler && { handler: lambda.handler }),
       role: lambda.role,
-      environment: lambda.environment,
+      environment: lambda.environment
     });
 
     const getAllResource =
       lambda.resource.length === 1
         ? api.root.addResource(lambda.resource[0])
         : api.root
-          .addResource(lambda.resource[0])
-          .addResource(lambda.resource[1]);
+            .addResource(lambda.resource[0])
+            .addResource(lambda.resource[1]);
 
-    getAllResource.addMethod(lambda.method, new LambdaIntegration(newLambda, {
-      integrationResponses: [
-        {
-          responseParameters: {
-            "method.response.header.Access-Control-Allow-Origin": "'*'",
-          },
-          responseTemplates: {
-            "application/json": JSON.stringify({
-              message: "$util.parseJson($input.body)",
-              state: "ok",
-            }),
-          },
-          statusCode: "200",
-        },
-      ],
-    }), {
-      methodResponses: [
-        {
-          statusCode: "200",
-          responseParameters: {
-            "method.response.header.Content-Type": true,
-            "method.response.header.Access-Control-Allow-Origin": true,
-            "method.response.header.Access-Control-Allow-Credentials": true,
-          },
-        },
-      ],
-    });
+    getAllResource.addMethod(
+      lambda.method,
+      new LambdaIntegration(newLambda, {
+        integrationResponses: [
+          {
+            responseParameters: {
+              "method.response.header.Access-Control-Allow-Origin": "'*'"
+            },
+            responseTemplates: {
+              "application/json": JSON.stringify({
+                message: "$util.parseJson($input.body)",
+                state: "ok"
+              })
+            },
+            statusCode: "200"
+          }
+        ]
+      }),
+      {
+        methodResponses: [
+          {
+            statusCode: "200",
+            responseParameters: {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            }
+          }
+        ]
+      }
+    );
     return acc.set(lambda.key, newLambda);
   };
   const reducedIntegrations = lambdasStructure.reduce(
@@ -83,7 +87,6 @@ export const LambdaIntegrator = (
   );
   return reducedIntegrations;
 };
-
 
 export function sendError(message: string): APIGatewayProxyResultV2 {
   return {

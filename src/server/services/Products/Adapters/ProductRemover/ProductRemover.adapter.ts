@@ -12,7 +12,7 @@ export class ProductRemover implements ForRemovingProduct {
 
   async removeProduct(id: string): Promise<void> {
     const params = GenerateDynamoSearchItem(this.productTable, id);
-    await this.dynamoClient.deleteItem(params)
+    await this.dynamoClient.deleteItem(params);
 
     return this.productService.removeProduct(id);
   }

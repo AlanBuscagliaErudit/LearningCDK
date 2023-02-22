@@ -28,4 +28,8 @@ export class ProductService {
   async removeProduct(id: string): Promise<void> {
     this.logger.log("removeProduct id: " + id);
   }
+
+  async createProduct(_body: Product): Promise<void> {
+    this.logger.log("createProduct");
+  }
 }

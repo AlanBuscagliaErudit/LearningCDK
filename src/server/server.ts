@@ -15,7 +15,7 @@ const appRouter = router({
   getProducts: publicProcedure.query(async () => getProducts),
   getProduct: publicProcedure.query(async () => getProduct),
   editProduct: publicProcedure.query(async () => editProduct),
-  removeProduct: publicProcedure.query(async () => removeProduct),
+  removeProduct: publicProcedure.query(async () => removeProduct)
 });
 
 export type AppRouter = typeof appRouter;
@@ -27,7 +27,7 @@ export const handler = awsLambdaRequestHandler({
   createContext,
   responseMeta: () => ({
     headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  }),
+      "Access-Control-Allow-Origin": "*"
+    }
+  })
 });

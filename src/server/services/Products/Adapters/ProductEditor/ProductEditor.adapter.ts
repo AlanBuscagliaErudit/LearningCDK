@@ -4,8 +4,6 @@ import { Product, ProductService } from "../../Domain/Product.service";
 import { ForEditingProduct } from "../../Ports/ForEditingProduct.port";
 
 export class ProductEditor implements ForEditingProduct {
-  private productTable = process.env.TODO_TABLE_NAME as string;
-
   constructor(
     private productService: ProductService,
     private dynamoClient: DynamoDB
@@ -16,7 +14,7 @@ export class ProductEditor implements ForEditingProduct {
 
     try {
       await this.dynamoClient.updateItem({
-        TableName: this.productTable,
+        TableName: process.env.TODO_TABLE_NAME as string,
         Key: marshall({ id }),
         ExpressionAttributeNames: {
           "#name": body.name,
