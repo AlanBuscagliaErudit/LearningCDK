@@ -6,7 +6,7 @@ import { Construct } from "constructs";
 import {
   LambdaForIntegrator,
   LambdaIntegrator,
-  Methods,
+  Methods
 } from "./server/utilities/lamda.utility";
 
 export class MyStack extends Stack {
@@ -21,8 +21,8 @@ export class MyStack extends Stack {
           "service-role/AWSLambdaBasicExecutionRole"
         ),
         ManagedPolicy.fromAwsManagedPolicyName("AmazonDynamoDBFullAccess"),
-        ManagedPolicy.fromAwsManagedPolicyName("CloudWatchFullAccess"),
-      ],
+        ManagedPolicy.fromAwsManagedPolicyName("CloudWatchFullAccess")
+      ]
     });
 
     const table = new dynamodb.Table(this, tableName, {
@@ -33,7 +33,7 @@ export class MyStack extends Stack {
       writeCapacity: 5,
       removalPolicy: RemovalPolicy.DESTROY,
       pointInTimeRecovery: true,
-      tableClass: dynamodb.TableClass.STANDARD_INFREQUENT_ACCESS,
+      tableClass: dynamodb.TableClass.STANDARD_INFREQUENT_ACCESS
     });
 
     const Lambdas: LambdaForIntegrator[] = [
@@ -42,38 +42,63 @@ export class MyStack extends Stack {
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName,
+          TODO_TABLE_NAME: tableName
         },
         role: lambdaRole,
         method: Methods.GET,
         tablePermissions: "read",
-        resource: ["getProducts"],
+        resource: ["getProducts"]
       },
       {
         key: "getProduct",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName,
+          TODO_TABLE_NAME: tableName
         },
         role: lambdaRole,
         method: Methods.GET,
         tablePermissions: "read",
-        resource: ["getProduct", "{id}"],
+        resource: ["getProduct", "{id}"]
       },
       {
         key: "createProduct",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName,
+          TODO_TABLE_NAME: tableName
         },
         role: lambdaRole,
         method: Methods.POST,
         tablePermissions: "write",
-        resource: ["createProduct"],
+        resource: ["createProduct"]
       },
+      {
+        key: "editProduct",
+        this: this,
+        entry: "src/server/server.ts",
+        environment: {
+          TODO_TABLE_NAME: tableName
+        },
+        role: lambdaRole,
+        method: Methods.PUT,
+        tablePermissions: "write",
+        resource: ["editProduct", "{id}"]
+      },
+      {
+        key: "removeProduct",
+        this: this,
+        entry: "src/server/server.ts",
+        environment: {
+          TODO_TABLE_NAME: tableName
+        },
+        role: lambdaRole,
+        method: Methods.DELETE,
+        tablePermissions: "write",
+        resource: ["removeProduct", "{id}"]
+      }
     ];
+    
     const api = new RestApi(this, "ApiGateway", {});
     const integratedLambdasMap = LambdaIntegrator(Lambdas, api);
     Lambdas.forEach((lambda) => {
@@ -94,7 +119,7 @@ export class MyStack extends Stack {
 // for development, use account/region from cdk cli
 const devEnv = {
   account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
+  region: process.env.CDK_DEFAULT_REGION
 };
 
 const app = new App();

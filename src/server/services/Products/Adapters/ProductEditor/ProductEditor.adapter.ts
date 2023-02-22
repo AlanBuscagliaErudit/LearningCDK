@@ -30,9 +30,11 @@ export class ProductEditor implements ForEditingProduct {
         Item: marshall(JSON.stringify(newItem)),
         TableName: this.productTable
       });
+
       return await this.productService.editProduct(result as Product, body);
     } catch (err) {
       console.log(err);
+      
       return null;
     }
   }

@@ -11,11 +11,13 @@ export class ProductService {
 
   async getProducts(products: Product[]): Promise<Product[]> {
     this.logger.log("getProducts");
+    
     return products;
   }
 
   async getProductById(product: Product): Promise<Product> {
     this.logger.log("getProductById");
+
     return product;
   }
 
@@ -23,5 +25,9 @@ export class ProductService {
     this.logger.log("editProduct");
 
     return { ...product, ...body };
+  }
+
+  async removeProduct(id: string): Promise<void> {
+    this.logger.log("removeProduct id: " + id);
   }
 }

@@ -2,6 +2,7 @@ import { DynamoDB, PutItemInput } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from "aws-lambda/trigger/api-gateway-proxy";
 import { v4 as uuid } from "uuid";
+import { sendError } from "../../utilities/lamda.utility";
 
 interface ProductBody {
   name: string;
@@ -17,7 +18,7 @@ export async function createProduct(event: APIGatewayProxyEventV2): Promise<APIG
   const tableName = process.env.TODO_TABLE_NAME;
 
   if (!body) {
-    return sendFail("invalid request");
+    return sendError("invalid request");
   }
 
   const dynamoClient = new DynamoDB({
@@ -43,13 +44,6 @@ export async function createProduct(event: APIGatewayProxyEventV2): Promise<APIG
 
   } catch (err) {
     console.log(err);
-    return sendFail("something went wrong");
+    return sendError("something went wrong");
   }
-}
-
-function sendFail(message: string): APIGatewayProxyResultV2 {
-  return {
-    statusCode: 400,
-    body: JSON.stringify({ message }),
-  };
 }

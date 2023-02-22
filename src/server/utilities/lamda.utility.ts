@@ -3,6 +3,8 @@ import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
 import { Role } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { APIGatewayProxyResultV2 } from "aws-lambda/trigger/api-gateway-proxy";
 
 export enum Methods {
   GET = "GET",
@@ -81,3 +83,11 @@ export const LambdaIntegrator = (
   );
   return reducedIntegrations;
 };
+
+
+export function sendError(message: string): APIGatewayProxyResultV2 {
+  return {
+    statusCode: 400,
+    body: JSON.stringify({ message })
+  };
+}
