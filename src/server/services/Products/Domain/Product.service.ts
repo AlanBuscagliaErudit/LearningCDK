@@ -15,7 +15,13 @@ export class ProductService {
   }
 
   async getProductById(product: Product): Promise<Product> {
-    this.logger.log("getProductById");    
+    this.logger.log("getProductById");
     return product;
+  }
+
+  async editProduct(product: Product, body: Product): Promise<Product> {
+    this.logger.log("editProduct");
+
+    return { ...product, ...body };
   }
 }

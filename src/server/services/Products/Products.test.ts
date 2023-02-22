@@ -1,3 +1,4 @@
+import { productEditorMock } from "./Adapters/ProductEditor/ProductEditor.mock";
 import { productGetterMock, productMock } from "./Adapters/ProductGetter/ProductGetter.mock";
 import { productServiceMock } from "./Domain/Product.service.mock";
 
@@ -15,4 +16,11 @@ describe("ProductGetter", () => {
     expect(spy).toHaveBeenCalled();
     expect(products).toEqual(productMock);
   })
+
+  it("should edit product", async () => {
+    const spy = jest.spyOn(productServiceMock, "editProduct");
+    const products = await productEditorMock.editProduct("1", productMock);
+    expect(spy).toHaveBeenCalled();
+    expect(products).toEqual(productMock);
+  }
 });
