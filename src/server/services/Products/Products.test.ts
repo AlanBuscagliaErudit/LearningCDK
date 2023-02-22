@@ -22,5 +22,5 @@ describe("ProductGetter", () => {
     const products = await productEditorMock.editProduct("1", productMock);
     expect(spy).toHaveBeenCalled();
     expect(products).toEqual(productMock);
-  }
+  })
 });
