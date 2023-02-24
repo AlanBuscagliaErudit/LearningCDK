@@ -1,3 +1,3 @@
 export interface ForEditing {
-  updateItemFromStorageById<T>(item: T, dbName: string): Promise<void>;
+  updateItemFromStorageById<T>(item: T): Promise<void>;
 }

@@ -1,8 +1,7 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
-import { warn } from "console";
-import { userMock } from "../../Users/Domain/Users.service.mock";
 import { StorageService } from "./Storage.service";
+import { userMock } from "../../Users/Domain/Users.service.mock";
 
 const marshalledUserMock = marshall(userMock);
 

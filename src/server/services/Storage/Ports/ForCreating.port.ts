@@ -1,3 +1,3 @@
 export interface ForCreating {
-  createItem: <T>(item: T, dbName: string) => Promise<void>;
+  createItem: <T>(item: T) => Promise<void>;
 }

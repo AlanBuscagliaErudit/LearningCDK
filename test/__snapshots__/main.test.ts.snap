@@ -1092,7 +1092,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
         },
         "Environment": {
           "Variables": {
@@ -1121,7 +1121,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
         },
         "Environment": {
           "Variables": {
@@ -1150,7 +1150,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
         },
         "Environment": {
           "Variables": {
@@ -1179,7 +1179,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
         },
         "Environment": {
           "Variables": {
@@ -1208,7 +1208,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
         },
         "Environment": {
           "Variables": {

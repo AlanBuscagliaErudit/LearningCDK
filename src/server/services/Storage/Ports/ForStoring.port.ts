@@ -1,3 +1,3 @@
 export interface ForStoring {
-  store(data: any, dbName: string): Promise<void>;
+  store<T>(data: T): Promise<void>;
 }
