@@ -13,9 +13,10 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     "@aws-cdk/aws-iam",
     "@trpc/client",
     "@trpc/server",
+    "@types/aws-lambda",
     "zod",
   ],
-  devDeps: ["@types/uuid", "@types/aws-lambda", "eslint-config-prettier"],
+  devDeps: ["@types/uuid", "eslint-config-prettier"],
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */

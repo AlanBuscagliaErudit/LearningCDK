@@ -29,109 +29,109 @@
       "description": "Prepare assets",
       "steps": [
         {
-          "spawn": "bundle:server/lambdas/Product/create-product.lambda"
+          "spawn": "bundle:server/lambdas/User/create-user.lambda"
         },
         {
-          "spawn": "bundle:server/lambdas/Product/delete-product.lambda"
+          "spawn": "bundle:server/lambdas/User/delete-user.lambda"
         },
         {
-          "spawn": "bundle:server/lambdas/Product/edit-product.lambda"
+          "spawn": "bundle:server/lambdas/User/edit-user.lambda"
         },
         {
-          "spawn": "bundle:server/lambdas/Product/get-all-products.lambda"
+          "spawn": "bundle:server/lambdas/User/get-all-users.lambda"
         },
         {
-          "spawn": "bundle:server/lambdas/Product/get-product.lambda"
+          "spawn": "bundle:server/lambdas/User/get-user.lambda"
         }
       ]
     },
-    "bundle:server/lambdas/Product/create-product.lambda": {
-      "name": "bundle:server/lambdas/Product/create-product.lambda",
-      "description": "Create a JavaScript bundle from src/server/lambdas/Product/create-product.lambda.ts",
+    "bundle:server/lambdas/User/create-user.lambda": {
+      "name": "bundle:server/lambdas/User/create-user.lambda",
+      "description": "Create a JavaScript bundle from src/server/lambdas/User/create-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/create-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/create-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/server/lambdas/User/create-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/create-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
-    "bundle:server/lambdas/Product/create-product.lambda:watch": {
-      "name": "bundle:server/lambdas/Product/create-product.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/server/lambdas/Product/create-product.lambda.ts",
+    "bundle:server/lambdas/User/create-user.lambda:watch": {
+      "name": "bundle:server/lambdas/User/create-user.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/server/lambdas/User/create-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/create-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/create-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/server/lambdas/User/create-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/create-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
-    "bundle:server/lambdas/Product/delete-product.lambda": {
-      "name": "bundle:server/lambdas/Product/delete-product.lambda",
-      "description": "Create a JavaScript bundle from src/server/lambdas/Product/delete-product.lambda.ts",
+    "bundle:server/lambdas/User/delete-user.lambda": {
+      "name": "bundle:server/lambdas/User/delete-user.lambda",
+      "description": "Create a JavaScript bundle from src/server/lambdas/User/delete-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/delete-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/delete-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/server/lambdas/User/delete-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/delete-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
-    "bundle:server/lambdas/Product/delete-product.lambda:watch": {
-      "name": "bundle:server/lambdas/Product/delete-product.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/server/lambdas/Product/delete-product.lambda.ts",
+    "bundle:server/lambdas/User/delete-user.lambda:watch": {
+      "name": "bundle:server/lambdas/User/delete-user.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/server/lambdas/User/delete-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/delete-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/delete-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/server/lambdas/User/delete-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/delete-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
-    "bundle:server/lambdas/Product/edit-product.lambda": {
-      "name": "bundle:server/lambdas/Product/edit-product.lambda",
-      "description": "Create a JavaScript bundle from src/server/lambdas/Product/edit-product.lambda.ts",
+    "bundle:server/lambdas/User/edit-user.lambda": {
+      "name": "bundle:server/lambdas/User/edit-user.lambda",
+      "description": "Create a JavaScript bundle from src/server/lambdas/User/edit-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/edit-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/edit-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/server/lambdas/User/edit-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/edit-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
-    "bundle:server/lambdas/Product/edit-product.lambda:watch": {
-      "name": "bundle:server/lambdas/Product/edit-product.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/server/lambdas/Product/edit-product.lambda.ts",
+    "bundle:server/lambdas/User/edit-user.lambda:watch": {
+      "name": "bundle:server/lambdas/User/edit-user.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/server/lambdas/User/edit-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/edit-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/edit-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/server/lambdas/User/edit-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/edit-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
-    "bundle:server/lambdas/Product/get-all-products.lambda": {
-      "name": "bundle:server/lambdas/Product/get-all-products.lambda",
-      "description": "Create a JavaScript bundle from src/server/lambdas/Product/get-all-products.lambda.ts",
+    "bundle:server/lambdas/User/get-all-users.lambda": {
+      "name": "bundle:server/lambdas/User/get-all-users.lambda",
+      "description": "Create a JavaScript bundle from src/server/lambdas/User/get-all-users.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/get-all-products.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/get-all-products.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/server/lambdas/User/get-all-users.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/get-all-users.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
-    "bundle:server/lambdas/Product/get-all-products.lambda:watch": {
-      "name": "bundle:server/lambdas/Product/get-all-products.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/server/lambdas/Product/get-all-products.lambda.ts",
+    "bundle:server/lambdas/User/get-all-users.lambda:watch": {
+      "name": "bundle:server/lambdas/User/get-all-users.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/server/lambdas/User/get-all-users.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/get-all-products.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/get-all-products.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/server/lambdas/User/get-all-users.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/get-all-users.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },
-    "bundle:server/lambdas/Product/get-product.lambda": {
-      "name": "bundle:server/lambdas/Product/get-product.lambda",
-      "description": "Create a JavaScript bundle from src/server/lambdas/Product/get-product.lambda.ts",
+    "bundle:server/lambdas/User/get-user.lambda": {
+      "name": "bundle:server/lambdas/User/get-user.lambda",
+      "description": "Create a JavaScript bundle from src/server/lambdas/User/get-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/get-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/get-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
+          "exec": "esbuild --bundle src/server/lambdas/User/get-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/get-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk"
         }
       ]
     },
-    "bundle:server/lambdas/Product/get-product.lambda:watch": {
-      "name": "bundle:server/lambdas/Product/get-product.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/server/lambdas/Product/get-product.lambda.ts",
+    "bundle:server/lambdas/User/get-user.lambda:watch": {
+      "name": "bundle:server/lambdas/User/get-user.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/server/lambdas/User/get-user.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/server/lambdas/Product/get-product.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/Product/get-product.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
+          "exec": "esbuild --bundle src/server/lambdas/User/get-user.lambda.ts --target=\"node14\" --platform=\"node\" --outfile=\"assets/server/lambdas/User/get-user.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:aws-sdk --watch"
         }
       ]
     },

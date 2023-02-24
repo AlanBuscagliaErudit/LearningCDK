@@ -93,15 +93,21 @@ exports[`Snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "ApiGatewayDeploymentA26796E89c4c788a41c12a1953e297aa0eed31d2": {
+    "ApiGatewayDeploymentA26796E87da347589187046f3e2b7b5b189da5b2": {
       "DependsOn": [
         "ApiGatewaycreateProductPOST1A1C3419",
         "ApiGatewaycreateProduct4D37D2F8",
+        "ApiGatewayeditProductidPUT405846ED",
+        "ApiGatewayeditProductid5D05777D",
+        "ApiGatewayeditProduct915CFC7B",
         "ApiGatewaygetProductidGET40C8A740",
         "ApiGatewaygetProductid0D6ECE12",
         "ApiGatewaygetProduct86CE857B",
         "ApiGatewaygetProductsGET19E1BF0C",
         "ApiGatewaygetProducts03F0A37C",
+        "ApiGatewayremoveProductidDELETED2C70B70",
+        "ApiGatewayremoveProductid8BDBED1A",
+        "ApiGatewayremoveProduct7AA0B957",
       ],
       "Properties": {
         "Description": "Automatically created by the RestApi construct",
@@ -117,7 +123,7 @@ exports[`Snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "ApiGatewayDeploymentA26796E89c4c788a41c12a1953e297aa0eed31d2",
+          "Ref": "ApiGatewayDeploymentA26796E87da347589187046f3e2b7b5b189da5b2",
         },
         "RestApiId": {
           "Ref": "ApiGateway11E7F47B",
@@ -147,6 +153,17 @@ exports[`Snapshot 1`] = `
         "HttpMethod": "POST",
         "Integration": {
           "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "ResponseTemplates": {
+                "application/json": "{"message":"$util.parseJson($input.body)","state":"ok"}",
+              },
+              "StatusCode": "200",
+            },
+          ],
           "Type": "AWS_PROXY",
           "Uri": {
             "Fn::Join": [
@@ -172,6 +189,16 @@ exports[`Snapshot 1`] = `
             ],
           },
         },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Content-Type": true,
+            },
+            "StatusCode": "200",
+          },
+        ],
         "ResourceId": {
           "Ref": "ApiGatewaycreateProduct4D37D2F8",
         },
@@ -259,6 +286,172 @@ exports[`Snapshot 1`] = `
       },
       "Type": "AWS::Lambda::Permission",
     },
+    "ApiGatewayeditProduct915CFC7B": {
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGateway11E7F47B",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "editProduct",
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ApiGatewayeditProductid5D05777D": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayeditProduct915CFC7B",
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ApiGatewayeditProductidPUT405846ED": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "PUT",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "ResponseTemplates": {
+                "application/json": "{"message":"$util.parseJson($input.body)","state":"ok"}",
+              },
+              "StatusCode": "200",
+            },
+          ],
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "editProductA5314486",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Content-Type": true,
+            },
+            "StatusCode": "200",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "ApiGatewayeditProductid5D05777D",
+        },
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "ApiGatewayeditProductidPUTApiPermissionTesttestApiGateway2C23B21DPUTeditProductidED1661BE": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "editProductA5314486",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "ApiGateway11E7F47B",
+              },
+              "/test-invoke-stage/PUT/editProduct/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ApiGatewayeditProductidPUTApiPermissiontestApiGateway2C23B21DPUTeditProductidD8A2984F": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "editProductA5314486",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "ApiGateway11E7F47B",
+              },
+              "/",
+              {
+                "Ref": "ApiGatewayDeploymentStageprod1C6D5CD6",
+              },
+              "/PUT/editProduct/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
     "ApiGatewaygetProduct86CE857B": {
       "Properties": {
         "ParentId": {
@@ -292,6 +485,17 @@ exports[`Snapshot 1`] = `
         "HttpMethod": "GET",
         "Integration": {
           "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "ResponseTemplates": {
+                "application/json": "{"message":"$util.parseJson($input.body)","state":"ok"}",
+              },
+              "StatusCode": "200",
+            },
+          ],
           "Type": "AWS_PROXY",
           "Uri": {
             "Fn::Join": [
@@ -317,6 +521,16 @@ exports[`Snapshot 1`] = `
             ],
           },
         },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Content-Type": true,
+            },
+            "StatusCode": "200",
+          },
+        ],
         "ResourceId": {
           "Ref": "ApiGatewaygetProductid0D6ECE12",
         },
@@ -425,6 +639,17 @@ exports[`Snapshot 1`] = `
         "HttpMethod": "GET",
         "Integration": {
           "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "ResponseTemplates": {
+                "application/json": "{"message":"$util.parseJson($input.body)","state":"ok"}",
+              },
+              "StatusCode": "200",
+            },
+          ],
           "Type": "AWS_PROXY",
           "Uri": {
             "Fn::Join": [
@@ -450,6 +675,16 @@ exports[`Snapshot 1`] = `
             ],
           },
         },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Content-Type": true,
+            },
+            "StatusCode": "200",
+          },
+        ],
         "ResourceId": {
           "Ref": "ApiGatewaygetProducts03F0A37C",
         },
@@ -536,6 +771,172 @@ exports[`Snapshot 1`] = `
         },
       },
       "Type": "AWS::Lambda::Permission",
+    },
+    "ApiGatewayremoveProduct7AA0B957": {
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGateway11E7F47B",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "removeProduct",
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ApiGatewayremoveProductid8BDBED1A": {
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayremoveProduct7AA0B957",
+        },
+        "PathPart": "{id}",
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "ApiGatewayremoveProductidDELETEApiPermissionTesttestApiGateway2C23B21DDELETEremoveProductid82A0B0E5": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "removeProductCBC7B534",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "ApiGateway11E7F47B",
+              },
+              "/test-invoke-stage/DELETE/removeProduct/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ApiGatewayremoveProductidDELETEApiPermissiontestApiGateway2C23B21DDELETEremoveProductid0C04250D": {
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "removeProductCBC7B534",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              {
+                "Ref": "ApiGateway11E7F47B",
+              },
+              "/",
+              {
+                "Ref": "ApiGatewayDeploymentStageprod1C6D5CD6",
+              },
+              "/DELETE/removeProduct/*",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "ApiGatewayremoveProductidDELETED2C70B70": {
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "DELETE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": [
+            {
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+              },
+              "ResponseTemplates": {
+                "application/json": "{"message":"$util.parseJson($input.body)","state":"ok"}",
+              },
+              "StatusCode": "200",
+            },
+          ],
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "removeProductCBC7B534",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": [
+          {
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Credentials": true,
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Content-Type": true,
+            },
+            "StatusCode": "200",
+          },
+        ],
+        "ResourceId": {
+          "Ref": "ApiGatewayremoveProductid8BDBED1A",
+        },
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
     },
     "LambdaRole3A44B857": {
       "Properties": {
@@ -691,7 +1092,36 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "b37ac6c5c7766dc0868333e0d681dc66c898194290cdc3281155e63ff4cc5d2f.zip",
+          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "TODO_TABLE_NAME": "ProductsTable",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaRole3A44B857",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "editProductA5314486": {
+      "DependsOn": [
+        "LambdaRoleDefaultPolicy75625A82",
+        "LambdaRole3A44B857",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
         },
         "Environment": {
           "Variables": {
@@ -720,7 +1150,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "b37ac6c5c7766dc0868333e0d681dc66c898194290cdc3281155e63ff4cc5d2f.zip",
+          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
         },
         "Environment": {
           "Variables": {
@@ -749,7 +1179,36 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "b37ac6c5c7766dc0868333e0d681dc66c898194290cdc3281155e63ff4cc5d2f.zip",
+          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "TODO_TABLE_NAME": "ProductsTable",
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaRole3A44B857",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs18.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "removeProductCBC7B534": {
+      "DependsOn": [
+        "LambdaRoleDefaultPolicy75625A82",
+        "LambdaRole3A44B857",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "a2db18e6138a00dd10f24d65c31d55ccccc3de17996d0cce0b5b0c64aa87b7b8.zip",
         },
         "Environment": {
           "Variables": {

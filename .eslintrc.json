@@ -147,11 +147,11 @@
         "devDependencies": [
           "**/test/**",
           "**/build-tools/**",
-          "src/server/lambdas/Product/create-product.lambda.ts",
-          "src/server/lambdas/Product/delete-product.lambda.ts",
-          "src/server/lambdas/Product/edit-product.lambda.ts",
-          "src/server/lambdas/Product/get-all-products.lambda.ts",
-          "src/server/lambdas/Product/get-product.lambda.ts"
+          "src/server/lambdas/User/create-user.lambda.ts",
+          "src/server/lambdas/User/delete-user.lambda.ts",
+          "src/server/lambdas/User/edit-user.lambda.ts",
+          "src/server/lambdas/User/get-all-users.lambda.ts",
+          "src/server/lambdas/User/get-user.lambda.ts"
         ],
         "optionalDependencies": false,
         "peerDependencies": true

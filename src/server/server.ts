@@ -1,9 +1,9 @@
 import { initTRPC } from "@trpc/server";
 import { awsLambdaRequestHandler } from "@trpc/server/adapters/aws-lambda";
-import { removeProduct } from "./lambdas/Product/delete-product.lambda";
-import { editProduct } from "./lambdas/Product/edit-product.lambda";
-import { getProducts } from "./lambdas/Product/get-all-products.lambda";
-import { getProduct } from "./lambdas/Product/get-product.lambda";
+import { removeUser } from "./lambdas/User/delete-user.lambda";
+import { editUser } from "./lambdas/User/edit-user.lambda";
+import { getUsers } from "./lambdas/User/get-all-users.lambda";
+import { getUser } from "./lambdas/User/get-user.lambda";
 
 const t = initTRPC.create();
 
@@ -12,10 +12,10 @@ export const { middleware } = t;
 export const publicProcedure = t.procedure;
 
 const appRouter = router({
-  getProducts: publicProcedure.query(async () => getProducts),
-  getProduct: publicProcedure.query(async () => getProduct),
-  editProduct: publicProcedure.query(async () => editProduct),
-  removeProduct: publicProcedure.query(async () => removeProduct)
+  getUsers: publicProcedure.query(async () => getUsers),
+  getUser: publicProcedure.query(async () => getUser),
+  editUser: publicProcedure.query(async () => editUser),
+  removeUser: publicProcedure.query(async () => removeUser)
 });
 
 export type AppRouter = typeof appRouter;

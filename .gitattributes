@@ -17,11 +17,11 @@
 /cdk.json linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
-/src/server/lambdas/Product/create-product-function.ts linguist-generated
-/src/server/lambdas/Product/delete-product-function.ts linguist-generated
-/src/server/lambdas/Product/edit-product-function.ts linguist-generated
-/src/server/lambdas/Product/get-all-products-function.ts linguist-generated
-/src/server/lambdas/Product/get-product-function.ts linguist-generated
+/src/server/lambdas/User/create-user-function.ts linguist-generated
+/src/server/lambdas/User/delete-user-function.ts linguist-generated
+/src/server/lambdas/User/edit-user-function.ts linguist-generated
+/src/server/lambdas/User/get-all-users-function.ts linguist-generated
+/src/server/lambdas/User/get-user-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /tsconfig.json linguist-generated
 /yarn.lock linguist-generated

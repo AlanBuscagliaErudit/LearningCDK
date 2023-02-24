@@ -50,8 +50,8 @@ junit.xml
 /cdk.out/
 .cdk.staging/
 .parcel-cache/
-!/src/server/lambdas/Product/create-product-function.ts
-!/src/server/lambdas/Product/delete-product-function.ts
-!/src/server/lambdas/Product/edit-product-function.ts
-!/src/server/lambdas/Product/get-all-products-function.ts
-!/src/server/lambdas/Product/get-product-function.ts
+!/src/server/lambdas/User/create-user-function.ts
+!/src/server/lambdas/User/delete-user-function.ts
+!/src/server/lambdas/User/edit-user-function.ts
+!/src/server/lambdas/User/get-all-users-function.ts
+!/src/server/lambdas/User/get-user-function.ts
