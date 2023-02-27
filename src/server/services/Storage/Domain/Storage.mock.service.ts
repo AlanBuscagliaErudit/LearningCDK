@@ -1,10 +1,18 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb";
 import { marshall } from "@aws-sdk/util-dynamodb";
 import { StorageService } from "./Storage.service";
-import { userMock } from "../../Users/Domain/Users.service.mock";
+
+export const userMock = {
+  account_id: "test",
+  company: "test",
+  email: "test",
+  name: "test",
+  userManagerLicenses: 1,
+};
 
 const marshalledUserMock = marshall(userMock);
 
+console.log(marshalledUserMock);
 export const dynamoClientMock = {
   putItem: jest.fn().mockResolvedValue({ Item: marshalledUserMock }),
   scan: jest.fn().mockResolvedValue({ Items: [marshalledUserMock] }),

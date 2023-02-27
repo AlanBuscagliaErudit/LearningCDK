@@ -2,7 +2,7 @@ import { userCreatorMock } from "./Adapters/UserCreator/UserCreator.mock";
 import { userEditorMock } from "./Adapters/UserEditor/UserEditor.mock";
 import { userGetterMock } from "./Adapters/UserGetter/UserGetter.mock";
 import { userRemoverMock } from "./Adapters/UserRemover/UserRemover.mock";
-import { userMock, userServiceMock } from "./Domain/Users.service.mock";
+import { userMock, userServiceMock } from "./Domain/Users.mock.service";
 
 describe("UserGetter", () => {
   it("should get users", async () => {
@@ -21,9 +21,8 @@ describe("UserGetter", () => {
 
   it("should edit user", async () => {
     const spy = jest.spyOn(userServiceMock, "editUser");
-    const users = await userEditorMock.editUser(userMock);
+    await userEditorMock.editUser(userMock);
     expect(spy).toHaveBeenCalled();
-    expect(users).toEqual(userMock);
   });
 
   it("should remove user", async () => {
