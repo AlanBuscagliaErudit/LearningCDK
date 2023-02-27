@@ -3,6 +3,7 @@ import { RestApi } from "aws-cdk-lib/aws-apigateway";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { ManagedPolicy, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
+import { CognitoPool } from "./cognito";
 import {
   LambdaForIntegrator,
   LambdaIntegrator,
@@ -13,6 +14,10 @@ export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
     const tableName = "ProductsTable";
+
+    new CognitoPool(this, "MyCognitoPool", {
+      stage: "Beta"
+    });
 
     const lambdaRole = new Role(this, "LambdaRole", {
       assumedBy: new ServicePrincipal("lambda.amazonaws.com"),

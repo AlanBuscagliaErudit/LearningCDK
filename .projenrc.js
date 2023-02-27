@@ -14,9 +14,9 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     "@trpc/client",
     "@trpc/server",
     "@types/aws-lambda",
-    "zod",
+    "zod"
   ],
-  devDeps: ["@types/uuid", "eslint-config-prettier"],
+  devDeps: ["@types/uuid", "eslint-config-prettier"]
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
@@ -26,8 +26,8 @@ project.eslint?.addOverride({
   extends: ["prettier"],
   rules: {
     "comma-dangle": "off",
-    quotes: [2, "double", { avoidEscape: true }],
+    quotes: [2, "double", { avoidEscape: true }]
   },
-  files: ["*"],
+  files: ["*"]
 });
 project.synth();
