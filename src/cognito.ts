@@ -36,25 +36,25 @@ export class CognitoPool extends Construct {
           mutable: true
         }
       },
-      customAttributes: {
-        company: new cognito.StringAttribute({ mutable: true })
-      },
+      // customAttributes: {
+      //   company: new cognito.StringAttribute({ mutable: true }),
+      // },
       passwordPolicy: {
         minLength: 8,
         requireLowercase: true,
         requireDigits: true,
         requireSymbols: true
       },
-      accountRecovery: cognito.AccountRecovery.EMAIL_AND_PHONE_WITHOUT_MFA,
+      accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
       removalPolicy: RemovalPolicy.RETAIN
     });
 
-    const client = cognitoPool.addClient("MyAppClient", {
+    cognitoPool.addClient("MyAppClient", {
       userPoolClientName: "MyAppClient",
       oAuth: {
         flows: { authorizationCodeGrant: true },
         scopes: [cognito.OAuthScope.OPENID],
-        callbackUrls: [""] // client url
+        callbackUrls: ["https://google.com"] // client url
       },
       supportedIdentityProviders: [
         cognito.UserPoolClientIdentityProvider.COGNITO

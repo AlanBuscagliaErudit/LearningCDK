@@ -14,7 +14,8 @@ const project = new awscdk.AwsCdkTypeScriptApp({
     "@trpc/client",
     "@trpc/server",
     "@types/aws-lambda",
-    "zod"
+    "zod",
+    "amazon-cognito-identity-js"
   ],
   devDeps: ["@types/uuid", "eslint-config-prettier"]
   // deps: [],                /* Runtime dependencies of this module. */

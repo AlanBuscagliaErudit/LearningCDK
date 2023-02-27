@@ -4,9 +4,9 @@ import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 export const GenerateDynamoSearchItem = (dbName: string, key: string) => {
   return {
     Key: marshall({
-      id: key,
+      id: key
     }),
-    TableName: dbName,
+    TableName: dbName
   };
 };
 

@@ -7,14 +7,11 @@ export const userMock = {
   company: "test",
   email: "test",
   name: "test",
-  userManagerLicenses: 1,
+  userManagerLicenses: 1
 };
 
-const marshalledUserMock = marshall(JSON.stringify(userMock), {
-  removeUndefinedValues: true
-});
+const marshalledUserMock = marshall(userMock);
 
-console.log(marshalledUserMock);
 export const dynamoClientMock = {
   putItem: jest.fn().mockResolvedValue({ Item: marshalledUserMock }),
   scan: jest.fn().mockResolvedValue({ Items: [marshalledUserMock] }),
