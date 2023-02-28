@@ -1,11 +1,11 @@
 aws cognito-idp sign-up \
---client-id 5ufpadk5o4je0r5456o5gdtrci \
---username alejandro.bailo@erudit.ai \
---password Erudit23! \
---user-attributes Name="email",Value="alejandro.bailo@erudit.ai" Name="name",Value="TestName" \
+--client-id <userpool_clientID> \
+--username <account_email> \
+--password <password> \
+--user-attributes Name="email",Value="<account_email>" Name="name",Value="TestName" \
 --region us-east-1
 
 aws cognito-idp initiate-auth --auth-flow USER_PASSWORD_AUTH \
---client-id 5ufpadk5o4je0r5456o5gdtrci \
---auth-parameters USERNAME=alejandro.bailo@erudit.ai,PASSWORD=Erudit23! \
+--client-id <userpool_clientID> \
+--auth-parameters USERNAME=<account_email>,PASSWORD=<password> \
 --region us-east-1
