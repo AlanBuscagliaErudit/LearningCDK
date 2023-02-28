@@ -29,6 +29,16 @@ exports[`Snapshot 1`] = `
         ],
       },
     },
+    "MyCognitoPoolCognitoUserPoolAppClientIDA125E4E1": {
+      "Value": {
+        "Ref": "MyCognitoPoolMyAppClientF485F915",
+      },
+    },
+    "MyCognitoPoolCognitoUserPoolID0AC89050": {
+      "Value": {
+        "Ref": "MyCognitoPoolC77DE011",
+      },
+    },
   },
   "Parameters": {
     "BootstrapVersion": {
@@ -93,7 +103,7 @@ exports[`Snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "ApiGatewayDeploymentA26796E87da347589187046f3e2b7b5b189da5b2": {
+    "ApiGatewayDeploymentA26796E88d011cfad4c5784a9b6cc3d695cb535a": {
       "DependsOn": [
         "ApiGatewaycreateProductPOST1A1C3419",
         "ApiGatewaycreateProduct4D37D2F8",
@@ -123,7 +133,7 @@ exports[`Snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "ApiGatewayDeploymentA26796E87da347589187046f3e2b7b5b189da5b2",
+          "Ref": "ApiGatewayDeploymentA26796E88d011cfad4c5784a9b6cc3d695cb535a",
         },
         "RestApiId": {
           "Ref": "ApiGateway11E7F47B",
@@ -149,7 +159,10 @@ exports[`Snapshot 1`] = `
     },
     "ApiGatewaycreateProductPOST1A1C3419": {
       "Properties": {
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "cognitouserpoolauthorizerF0BBE952",
+        },
         "HttpMethod": "POST",
         "Integration": {
           "IntegrationHttpMethod": "POST",
@@ -315,7 +328,10 @@ exports[`Snapshot 1`] = `
     },
     "ApiGatewayeditProductidPUT405846ED": {
       "Properties": {
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "cognitouserpoolauthorizerF0BBE952",
+        },
         "HttpMethod": "PUT",
         "Integration": {
           "IntegrationHttpMethod": "POST",
@@ -481,7 +497,10 @@ exports[`Snapshot 1`] = `
     },
     "ApiGatewaygetProductidGET40C8A740": {
       "Properties": {
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "cognitouserpoolauthorizerF0BBE952",
+        },
         "HttpMethod": "GET",
         "Integration": {
           "IntegrationHttpMethod": "POST",
@@ -635,7 +654,10 @@ exports[`Snapshot 1`] = `
     },
     "ApiGatewaygetProductsGET19E1BF0C": {
       "Properties": {
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "cognitouserpoolauthorizerF0BBE952",
+        },
         "HttpMethod": "GET",
         "Integration": {
           "IntegrationHttpMethod": "POST",
@@ -879,7 +901,10 @@ exports[`Snapshot 1`] = `
     },
     "ApiGatewayremoveProductidDELETED2C70B70": {
       "Properties": {
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "COGNITO_USER_POOLS",
+        "AuthorizerId": {
+          "Ref": "cognitouserpoolauthorizerF0BBE952",
+        },
         "HttpMethod": "DELETE",
         "Integration": {
           "IntegrationHttpMethod": "POST",
@@ -1216,6 +1241,25 @@ exports[`Snapshot 1`] = `
       "Type": "AWS::DynamoDB::Table",
       "UpdateReplacePolicy": "Delete",
     },
+    "cognitouserpoolauthorizerF0BBE952": {
+      "Properties": {
+        "IdentitySource": "method.request.header.Authorization",
+        "Name": "testcognitouserpoolauthorizer12B036F9",
+        "ProviderARNs": [
+          {
+            "Fn::GetAtt": [
+              "MyCognitoPoolC77DE011",
+              "Arn",
+            ],
+          },
+        ],
+        "RestApiId": {
+          "Ref": "ApiGateway11E7F47B",
+        },
+        "Type": "COGNITO_USER_POOLS",
+      },
+      "Type": "AWS::ApiGateway::Authorizer",
+    },
     "createProduct6AB81851": {
       "DependsOn": [
         "LambdaRoleDefaultPolicy75625A82",
@@ -1226,7 +1270,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "06b6269ed3153a97ff8bf62cb2eac36b496255067c896db6e2f2ddaa2d3721c2.zip",
         },
         "Environment": {
           "Variables": {
@@ -1255,7 +1299,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "06b6269ed3153a97ff8bf62cb2eac36b496255067c896db6e2f2ddaa2d3721c2.zip",
         },
         "Environment": {
           "Variables": {
@@ -1284,7 +1328,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "06b6269ed3153a97ff8bf62cb2eac36b496255067c896db6e2f2ddaa2d3721c2.zip",
         },
         "Environment": {
           "Variables": {
@@ -1313,7 +1357,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "06b6269ed3153a97ff8bf62cb2eac36b496255067c896db6e2f2ddaa2d3721c2.zip",
         },
         "Environment": {
           "Variables": {
@@ -1342,7 +1386,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "06b6269ed3153a97ff8bf62cb2eac36b496255067c896db6e2f2ddaa2d3721c2.zip",
         },
         "Environment": {
           "Variables": {
