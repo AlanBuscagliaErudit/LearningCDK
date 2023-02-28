@@ -1,5 +1,10 @@
 import path from "path";
-import { LambdaIntegration, RestApi } from "aws-cdk-lib/aws-apigateway";
+import {
+  AuthorizationType,
+  IAuthorizer,
+  LambdaIntegration,
+  RestApi
+} from "aws-cdk-lib/aws-apigateway";
 import { Role } from "aws-cdk-lib/aws-iam";
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
@@ -27,7 +32,8 @@ export interface LambdaForIntegrator {
 
 export const LambdaIntegrator = (
   lambdasStructure: LambdaForIntegrator[],
-  api: RestApi
+  api: RestApi,
+  cognitoUserPoolAuthorizer: IAuthorizer
 ) => {
   const lambdaGeneratorReducer = (
     acc: Map<string, NodejsFunction>,
@@ -76,7 +82,9 @@ export const LambdaIntegrator = (
               "method.response.header.Access-Control-Allow-Credentials": true
             }
           }
-        ]
+        ],
+        authorizer: cognitoUserPoolAuthorizer,
+        authorizationType: AuthorizationType.COGNITO
       }
     );
     return acc.set(lambda.key, newLambda);

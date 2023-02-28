@@ -1,5 +1,8 @@
 import { App, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
-import { RestApi } from "aws-cdk-lib/aws-apigateway";
+import {
+  RestApi,
+  CognitoUserPoolsAuthorizer
+} from "aws-cdk-lib/aws-apigateway";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { ManagedPolicy, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
@@ -10,15 +13,22 @@ import {
   Methods
 } from "./server/utilities/lamda.utility";
 
+// for development, use account/region from cdk cli
+const devEnv = {
+  account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: process.env.CDK_DEFAULT_REGION
+};
+
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
-    const tableName = "ProductsTable";
 
+    // Cognito Pool
     new CognitoPool(this, "MyCognitoPool", {
       stage: "Beta"
     });
 
+    // Lambda Role
     const lambdaRole = new Role(this, "LambdaRole", {
       assumedBy: new ServicePrincipal("lambda.amazonaws.com"),
       managedPolicies: [
@@ -30,6 +40,7 @@ export class MyStack extends Stack {
       ]
     });
 
+    const tableName = "ProductsTable";
     const table = new dynamodb.Table(this, tableName, {
       tableName,
       partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
@@ -105,7 +116,20 @@ export class MyStack extends Stack {
     ];
 
     const api = new RestApi(this, "ApiGateway", {});
-    const integratedLambdasMap = LambdaIntegrator(Lambdas, api);
+
+    const userPoolsAuthorizer = new CognitoUserPoolsAuthorizer(
+      this,
+      "cognito-userpool-authorizer",
+      {
+        cognitoUserPools: [CognitoPool.userPool]
+      }
+    );
+
+    const integratedLambdasMap = LambdaIntegrator(
+      Lambdas,
+      api,
+      userPoolsAuthorizer
+    );
     Lambdas.forEach((lambda) => {
       const newLambda = integratedLambdasMap.get(lambda.key);
       if (newLambda) {
@@ -121,14 +145,7 @@ export class MyStack extends Stack {
   }
 }
 
-// for development, use account/region from cdk cli
-const devEnv = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION
-};
-
 const app = new App();
-
 new MyStack(app, "awstest-dev", { env: devEnv });
 // new MyStack(app, 'awstest-prod', { env: prodEnv });
 

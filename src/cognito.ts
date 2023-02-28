@@ -1,4 +1,4 @@
-import { Duration, RemovalPolicy } from "aws-cdk-lib";
+import { Duration, RemovalPolicy, CfnOutput } from "aws-cdk-lib";
 import * as cognito from "aws-cdk-lib/aws-cognito";
 import { Construct } from "constructs";
 
@@ -7,10 +7,12 @@ export interface CognitoPoolProps {
 }
 
 export class CognitoPool extends Construct {
+  public static userPool: cognito.UserPool;
+
   constructor(scope: Construct, id: string, props: CognitoPoolProps) {
     super(scope, id);
 
-    const cognitoPool = new cognito.UserPool(this, "CognitoPool", {
+    CognitoPool.userPool = new cognito.UserPool(this, "CognitoPool", {
       userPoolName: `${props.stage}-CognitoPool`,
       selfSignUpEnabled: true,
       signInCaseSensitive: false,
@@ -36,20 +38,21 @@ export class CognitoPool extends Construct {
           mutable: true,
         },
       },
-      customAttributes: {
-        company: new cognito.StringAttribute({ mutable: true }),
-      },
+      // customAttributes: {
+      //   company: new cognito.StringAttribute({ mutable: true }),
+      // },
       passwordPolicy: {
         minLength: 8,
         requireLowercase: true,
         requireDigits: true,
         requireSymbols: true,
       },
-      accountRecovery: cognito.AccountRecovery.EMAIL_AND_PHONE_WITHOUT_MFA,
+
+      accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
       removalPolicy: RemovalPolicy.RETAIN,
     });
 
-    cognitoPool.addClient("MyAppClient", {
+    const userPoolClient = CognitoPool.userPool.addClient("MyAppClient", {
       userPoolClientName: "MyAppClient",
       oAuth: {
         flows: { authorizationCodeGrant: true },
@@ -62,6 +65,14 @@ export class CognitoPool extends Construct {
       refreshTokenValidity: Duration.minutes(60),
       idTokenValidity: Duration.minutes(30),
       accessTokenValidity: Duration.minutes(30),
+    });
+
+    new CfnOutput(this, "CognitoUserPoolID", {
+      value: CognitoPool.userPool.userPoolId,
+    });
+
+    new CfnOutput(this, "CognitoUserPoolAppClientID", {
+      value: userPoolClient.userPoolClientId,
     });
   }
 }

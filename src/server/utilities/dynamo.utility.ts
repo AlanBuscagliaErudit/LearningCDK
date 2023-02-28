@@ -18,4 +18,4 @@ export const RecordGenerator = (item: { [key: string]: any }) => {
     return { ...acc, [key]: { S: item[key] } };
   };
   return Object.keys(item).reduce(recordReducer, {});
-}
+};
