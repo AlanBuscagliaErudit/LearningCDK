@@ -1,14 +1,5 @@
 import { AttributeValue } from "@aws-sdk/client-dynamodb/dist-types/models/models_0";
-import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
-
-export const GenerateDynamoSearchItem = (dbName: string, key: string) => {
-  return {
-    Key: marshall({
-      id: key,
-    }),
-    TableName: dbName,
-  };
-};
+import { unmarshall } from "@aws-sdk/util-dynamodb";
 
 export const TransformDynamoItem = (
   item:
@@ -27,4 +18,4 @@ export const RecordGenerator = (item: { [key: string]: any }) => {
     return { ...acc, [key]: { S: item[key] } };
   };
   return Object.keys(item).reduce(recordReducer, {});
-};
+}

@@ -10,17 +10,8 @@ export const userMock = {
   userManagerLicenses: 1,
 };
 
-const marshalledUserMock = marshall(JSON.stringify(userMock), {
-  removeUndefinedValues: true
-});
-
-console.log(marshalledUserMock);
 export const dynamoClientMock = {
-  putItem: jest.fn().mockResolvedValue({ Item: marshalledUserMock }),
-  scan: jest.fn().mockResolvedValue({ Items: [marshalledUserMock] }),
-  getItem: jest.fn().mockResolvedValue({ Item: marshalledUserMock }),
-  deleteItem: jest.fn().mockResolvedValue({ Item: { marshalledUserMock } }),
-  updateItem: jest.fn().mockResolvedValue({ Item: marshalledUserMock })
+  send: jest.fn().mockResolvedValue(marshall(userMock)),
 } as unknown as DynamoDB;
 
 export const storageServiceMock = new StorageService(dynamoClientMock);

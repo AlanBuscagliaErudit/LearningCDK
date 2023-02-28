@@ -1054,6 +1054,149 @@ exports[`Snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
+    "MyCognitoPoolC77DE011": {
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "AccountRecoverySetting": {
+          "RecoveryMechanisms": [
+            {
+              "Name": "verified_email",
+              "Priority": 1,
+            },
+            {
+              "Name": "verified_phone_number",
+              "Priority": 2,
+            },
+          ],
+        },
+        "AdminCreateUserConfig": {
+          "AllowAdminCreateUserOnly": false,
+        },
+        "AutoVerifiedAttributes": [
+          "email",
+        ],
+        "EmailVerificationMessage": "Verification code is {####}.",
+        "EmailVerificationSubject": "Hello from the cave!",
+        "Policies": {
+          "PasswordPolicy": {
+            "MinimumLength": 8,
+            "RequireLowercase": true,
+            "RequireNumbers": true,
+            "RequireSymbols": true,
+          },
+        },
+        "Schema": [
+          {
+            "Mutable": true,
+            "Name": "name",
+            "Required": true,
+          },
+          {
+            "Mutable": true,
+            "Name": "email",
+            "Required": true,
+          },
+          {
+            "AttributeDataType": "String",
+            "Mutable": true,
+            "Name": "company",
+          },
+        ],
+        "SmsConfiguration": {
+          "ExternalId": "testMyCognitoPool9E1F0FDE",
+          "SnsCallerArn": {
+            "Fn::GetAtt": [
+              "MyCognitoPoolsmsRole2DD4266C",
+              "Arn",
+            ],
+          },
+        },
+        "SmsVerificationMessage": "The verification code to your new account is {####}",
+        "UserPoolName": "Beta-CognitoPool",
+        "UsernameAttributes": [
+          "email",
+          "phone_number",
+        ],
+        "UsernameConfiguration": {
+          "CaseSensitive": false,
+        },
+        "VerificationMessageTemplate": {
+          "DefaultEmailOption": "CONFIRM_WITH_CODE",
+          "EmailMessage": "Verification code is {####}.",
+          "EmailSubject": "Hello from the cave!",
+          "SmsMessage": "The verification code to your new account is {####}",
+        },
+      },
+      "Type": "AWS::Cognito::UserPool",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "MyCognitoPoolMyAppClientF485F915": {
+      "Properties": {
+        "AccessTokenValidity": 30,
+        "AllowedOAuthFlows": [
+          "code",
+        ],
+        "AllowedOAuthFlowsUserPoolClient": true,
+        "AllowedOAuthScopes": [
+          "openid",
+        ],
+        "CallbackURLs": [
+          "https://google.com",
+        ],
+        "ClientName": "MyAppClient",
+        "IdTokenValidity": 30,
+        "RefreshTokenValidity": 60,
+        "SupportedIdentityProviders": [
+          "COGNITO",
+        ],
+        "TokenValidityUnits": {
+          "AccessToken": "minutes",
+          "IdToken": "minutes",
+          "RefreshToken": "minutes",
+        },
+        "UserPoolId": {
+          "Ref": "MyCognitoPoolC77DE011",
+        },
+      },
+      "Type": "AWS::Cognito::UserPoolClient",
+    },
+    "MyCognitoPoolsmsRole2DD4266C": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "sts:ExternalId": "testMyCognitoPool9E1F0FDE",
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cognito-idp.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": [
+          {
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Action": "sns:Publish",
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "sns-publish",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "ProductsTable241ADBFF": {
       "DeletionPolicy": "Delete",
       "Properties": {
@@ -1092,7 +1235,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "9361eafc4bbd796ece418e9c33998cfaa084ad1722938994e4f445535f905983.zip",
         },
         "Environment": {
           "Variables": {
@@ -1121,7 +1264,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "9361eafc4bbd796ece418e9c33998cfaa084ad1722938994e4f445535f905983.zip",
         },
         "Environment": {
           "Variables": {
@@ -1150,7 +1293,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "9361eafc4bbd796ece418e9c33998cfaa084ad1722938994e4f445535f905983.zip",
         },
         "Environment": {
           "Variables": {
@@ -1179,7 +1322,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "9361eafc4bbd796ece418e9c33998cfaa084ad1722938994e4f445535f905983.zip",
         },
         "Environment": {
           "Variables": {
@@ -1208,7 +1351,7 @@ exports[`Snapshot 1`] = `
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
-          "S3Key": "f84c7c0ac097612a1adf461bf61b92a9b1f6fcf8c1c89f721ba5b2ec6ff94e9d.zip",
+          "S3Key": "9361eafc4bbd796ece418e9c33998cfaa084ad1722938994e4f445535f905983.zip",
         },
         "Environment": {
           "Variables": {

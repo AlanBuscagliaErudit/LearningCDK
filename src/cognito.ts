@@ -16,52 +16,52 @@ export class CognitoPool extends Construct {
       signInCaseSensitive: false,
       signInAliases: {
         email: true,
-        phone: true
+        phone: true,
       },
       autoVerify: {
-        email: true
+        email: true,
       },
       userVerification: {
         emailSubject: "Hello from the cave!",
         emailBody: "Verification code is {####}.",
-        emailStyle: cognito.VerificationEmailStyle.CODE
+        emailStyle: cognito.VerificationEmailStyle.CODE,
       },
       standardAttributes: {
         fullname: {
           required: true,
-          mutable: true
+          mutable: true,
         },
         email: {
           required: true,
-          mutable: true
-        }
+          mutable: true,
+        },
       },
       customAttributes: {
-        company: new cognito.StringAttribute({ mutable: true })
+        company: new cognito.StringAttribute({ mutable: true }),
       },
       passwordPolicy: {
         minLength: 8,
         requireLowercase: true,
         requireDigits: true,
-        requireSymbols: true
+        requireSymbols: true,
       },
       accountRecovery: cognito.AccountRecovery.EMAIL_AND_PHONE_WITHOUT_MFA,
-      removalPolicy: RemovalPolicy.RETAIN
+      removalPolicy: RemovalPolicy.RETAIN,
     });
 
-    const client = cognitoPool.addClient("MyAppClient", {
+    cognitoPool.addClient("MyAppClient", {
       userPoolClientName: "MyAppClient",
       oAuth: {
         flows: { authorizationCodeGrant: true },
         scopes: [cognito.OAuthScope.OPENID],
-        callbackUrls: [""] // client url
+        callbackUrls: ["https://google.com"], // client url
       },
       supportedIdentityProviders: [
-        cognito.UserPoolClientIdentityProvider.COGNITO
+        cognito.UserPoolClientIdentityProvider.COGNITO,
       ],
       refreshTokenValidity: Duration.minutes(60),
       idTokenValidity: Duration.minutes(30),
-      accessTokenValidity: Duration.minutes(30)
+      accessTokenValidity: Duration.minutes(30),
     });
   }
 }
