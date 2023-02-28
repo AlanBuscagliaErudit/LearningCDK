@@ -55,3 +55,5 @@ junit.xml
 !/src/server/lambdas/User/edit-user-function.ts
 !/src/server/lambdas/User/get-all-users-function.ts
 !/src/server/lambdas/User/get-user-function.ts
+!/src/testCognito.txt
+

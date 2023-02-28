@@ -1,7 +1,7 @@
 import { App, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import {
   RestApi,
-  CognitoUserPoolsAuthorizer
+  CognitoUserPoolsAuthorizer,
 } from "aws-cdk-lib/aws-apigateway";
 import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 import { ManagedPolicy, Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
@@ -10,13 +10,13 @@ import { CognitoPool } from "./cognito";
 import {
   LambdaForIntegrator,
   LambdaIntegrator,
-  Methods
+  Methods,
 } from "./server/utilities/lamda.utility";
 
 // for development, use account/region from cdk cli
 const devEnv = {
   account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION
+  region: process.env.CDK_DEFAULT_REGION,
 };
 
 export class MyStack extends Stack {
@@ -25,7 +25,7 @@ export class MyStack extends Stack {
 
     // Cognito Pool
     new CognitoPool(this, "MyCognitoPool", {
-      stage: "Beta"
+      stage: "Beta",
     });
 
     // Lambda Role
@@ -36,8 +36,8 @@ export class MyStack extends Stack {
           "service-role/AWSLambdaBasicExecutionRole"
         ),
         ManagedPolicy.fromAwsManagedPolicyName("AmazonDynamoDBFullAccess"),
-        ManagedPolicy.fromAwsManagedPolicyName("CloudWatchFullAccess")
-      ]
+        ManagedPolicy.fromAwsManagedPolicyName("CloudWatchFullAccess"),
+      ],
     });
 
     const tableName = "ProductsTable";
@@ -49,70 +49,70 @@ export class MyStack extends Stack {
       writeCapacity: 5,
       removalPolicy: RemovalPolicy.DESTROY,
       pointInTimeRecovery: true,
-      tableClass: dynamodb.TableClass.STANDARD_INFREQUENT_ACCESS
+      tableClass: dynamodb.TableClass.STANDARD_INFREQUENT_ACCESS,
     });
 
     const Lambdas: LambdaForIntegrator[] = [
       {
-        key: "getProducts",
+        key: "getUsers",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName
+          TODO_TABLE_NAME: tableName,
         },
         role: lambdaRole,
         method: Methods.GET,
         tablePermissions: "read",
-        resource: ["getProducts"]
+        resource: ["getUsers"],
       },
       {
-        key: "getProduct",
+        key: "getUser",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName
+          TODO_TABLE_NAME: tableName,
         },
         role: lambdaRole,
         method: Methods.GET,
         tablePermissions: "read",
-        resource: ["getProduct", "{id}"]
+        resource: ["getUser", "{id}"],
       },
       {
-        key: "createProduct",
+        key: "createUser",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName
+          TODO_TABLE_NAME: tableName,
         },
         role: lambdaRole,
         method: Methods.POST,
         tablePermissions: "write",
-        resource: ["createProduct"]
+        resource: ["createUser"],
       },
       {
-        key: "editProduct",
+        key: "editUser",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName
+          TODO_TABLE_NAME: tableName,
         },
         role: lambdaRole,
         method: Methods.PUT,
         tablePermissions: "write",
-        resource: ["editProduct", "{id}"]
+        resource: ["editUser", "{id}"],
       },
       {
-        key: "removeProduct",
+        key: "removeUser",
         this: this,
         entry: "src/server/server.ts",
         environment: {
-          TODO_TABLE_NAME: tableName
+          TODO_TABLE_NAME: tableName,
         },
         role: lambdaRole,
         method: Methods.DELETE,
         tablePermissions: "write",
-        resource: ["removeProduct", "{id}"]
-      }
+        resource: ["removeUser", "{id}"],
+      },
     ];
 
     const api = new RestApi(this, "ApiGateway", {});
@@ -121,7 +121,7 @@ export class MyStack extends Stack {
       this,
       "cognito-userpool-authorizer",
       {
-        cognitoUserPools: [CognitoPool.userPool]
+        cognitoUserPools: [CognitoPool.userPool],
       }
     );
 
