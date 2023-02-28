@@ -12,7 +12,7 @@ import { Retriever } from "../Storage/Adapters/Retriever.adapter";
 import { StorageService } from "../Storage/Domain/Storage.service";
 
 const dynamoClient = new DynamoDB({
-  region: process.env.AWS_REGION
+  region: process.env.AWS_REGION,
 });
 
 const logger = new Logger();
@@ -21,7 +21,13 @@ const retriever = new Retriever(storage);
 const editor = new Editor(storage);
 const remover = new Remover(storage);
 const creator = new Creator(storage);
-const userService = new UsersService(logger, retriever, editor, remover, creator);
+const userService = new UsersService(
+  logger,
+  retriever,
+  editor,
+  remover,
+  creator
+);
 export const userGetter = new UserGetter(userService);
 export const userEditor = new UserEditor(userService);
 export const userRemover = new UserRemover(userService);

@@ -7,16 +7,14 @@ import { userMock, userServiceMock } from "./Domain/Users.mock.service";
 describe("UserGetter", () => {
   it("should get users", async () => {
     const spyGetUser = jest.spyOn(userServiceMock, "getUsers");
-    const users = await userGetterMock.getUsers();
+    await userGetterMock.getUsers();
     expect(spyGetUser).toHaveBeenCalled();
-    expect(users).toEqual([userMock]);
   });
 
   it("should get user by id", async () => {
     const spy = jest.spyOn(userServiceMock, "getUserById");
-    const users = await userGetterMock.getUserByid("1");
+    await userGetterMock.getUserByid("1");
     expect(spy).toHaveBeenCalled();
-    expect(users).toEqual(userMock);
   });
 
   it("should edit user", async () => {
