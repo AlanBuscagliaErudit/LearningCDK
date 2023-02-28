@@ -1,4 +1,5 @@
 aws cognito-idp sign-up \
+<<<<<<< HEAD
 --client-id 588bvqnfe2rrer32qk4jdhreeo \
 --username alan.buscaglia@erudit.ai \
 --password Erudit23! \
@@ -15,3 +16,15 @@ TOKEN: eyJraWQiOiJZMWhoV21GMmFEbHVGYW92Q3JvT3cxdG43dlk0R0JSUFNmU0NiQUZKeDQwPSIsI
 
 
 curl --request GET 'https://j2jzdemtpc.execute-api.us-east-1.amazonaws.com/prod/getUsers' \ --header 'Authorization: eyJraWQiOiJZMWhoV21GMmFEbHVGYW92Q3JvT3cxdG43dlk0R0JSUFNmU0NiQUZKeDQwPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIwODRmOWY5Zi1lZTU5LTQ1MDAtOThhZS0wM2MzMGJlZmNkNTMiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9wWTZmdjlYQ0oiLCJjbGllbnRfaWQiOiI1ODhidnFuZmUycnJlcjMycWs0amRocmVlbyIsIm9yaWdpbl9qdGkiOiI0ZWY5ODc0ZS0yNzQxLTRjOGMtOGM0Mi0yMWY1NTliYzMyNjIiLCJldmVudF9pZCI6IjEzZjFkZjFjLTE4MWEtNGE0MC1hZjgxLTI3NmJlYTA0MzA1ZCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2Nzc1OTM5MTgsImV4cCI6MTY3NzU5NTcxOCwiaWF0IjoxNjc3NTkzOTE4LCJqdGkiOiIxZTFiZmM1NS03MGQwLTRiNmUtYmY4MS1mZWUyY2FmZmNlOGIiLCJ1c2VybmFtZSI6IjA4NGY5ZjlmLWVlNTktNDUwMC05OGFlLTAzYzMwYmVmY2Q1MyJ9.pYj7Bij9_KuM31OfbU_NS8O28SS5b7OjjOsiNa_ssnhnKGwOryLRdbM0WFZPgGCqpP0foViN_VYP2KaLGdk2svpe9Z4SDLs8fYHIIcreFmHHB5F9-8OC6KcYnBAo_7ZZh-2kARerVGHS7koX6dLkMqiqi6Y65zcIVA55oKhFR003Z-dQpZId7-UrXmq8X9zHwonG7ON_n6Ze6-QkTqwm8_bflo-rwF0e5X2SzAk1uJRbI-phic0dPPNgXjD5vPLPG1hZ3RnoNpatHAhVFNHmfiaaqVaEaMAMQqRts948z0Ai8tdfXss8L5hAZPtVVmzxfPtvS1Y91HlE-Dkbq603Jg
+=======
+--client-id <userpool_clientID> \
+--username <account_email> \
+--password <password> \
+--user-attributes Name="email",Value="<account_email>" Name="name",Value="TestName" \
+--region us-east-1
+
+aws cognito-idp initiate-auth --auth-flow USER_PASSWORD_AUTH \
+--client-id <userpool_clientID> \
+--auth-parameters USERNAME=<account_email>,PASSWORD=<password> \
+--region us-east-1
+>>>>>>> 1c323107e29b124800a338de0b5a80fc695a7c33
